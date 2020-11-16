@@ -5,17 +5,7 @@ require("dotenv").config({
 const axios = require('axios')
 
 exports.sourceNodes = async({ actions, createNodeId, createContentDigest }) => {
-  // const results = await axios({
-  //   method: "GET",
-  //   url: "https://api.themoviedb.org/3/discover/movie",
-  //   params: {
-  //     api_key: process.env.MOVIES_DB_API_KEY,
-  //     sort_by: 'popularity.desc',
-  //     certification_country: 'US',
-  //     page: '2',
-  //   }
-  // })
-  const numPages = 15
+  const numPages = 2
 
   const axiosRequests = [...Array(numPages).keys()].map(i => (
     axios({
@@ -24,7 +14,7 @@ exports.sourceNodes = async({ actions, createNodeId, createContentDigest }) => {
       params: {
         api_key: process.env.MOVIES_DB_API_KEY,
         sort_by: 'popularity.desc',
-        // certification_country: 'US',
+        certification_country: 'US',
         page: i+1,
       }
     })
@@ -41,6 +31,7 @@ exports.sourceNodes = async({ actions, createNodeId, createContentDigest }) => {
   movies.forEach(movie => {
     const node = {
       ...movie,
+      movieId: movie.id,
       poster: 'https://image.tmdb.org/t/p/w200/'+movie.poster_path,
       id: createNodeId(`Movie-${movie.id}`),
       internal: {
@@ -50,4 +41,52 @@ exports.sourceNodes = async({ actions, createNodeId, createContentDigest }) => {
     }
     actions.createNode(node)
   })
+}
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const result = await graphql(`
+    query {
+      allMovie {
+        nodes {
+          movieId
+          title
+        }
+      }
+    }
+  `)
+
+  if(result.errors)
+  {
+    reporter.panic('falied to create movie pages ', result.errors)
+  }
+
+  const movieNodes = result.data.allMovie.nodes
+
+  for(i=0; i< movieNodes.length; i++){
+    const {movieId, title} = movieNodes[i]
+
+    const movieTrailer = await axios({
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/${movieId}/videos`,
+      params: {
+        api_key: process.env.MOVIES_DB_API_KEY,
+      }
+    })
+
+    let key = ''
+    
+    if(movieTrailer.data.results.length > 0){
+      [{key}] = movieTrailer.data.results 
+    }
+
+    actions.createPage({
+      path: movieId + '',
+      component: require.resolve(`./src/templates/movie.js`),
+      context: {
+        slug: movieId,
+        title,
+        ...(key && {trailer: `https://www.youtube.com/embed/${key}`})
+      },
+    })
+  }
 }

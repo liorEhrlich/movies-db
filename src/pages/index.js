@@ -1,12 +1,12 @@
 import React from "react"
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import styled from '@emotion/styled'
 
 export const query = graphql`
   {
     allMovie {
       nodes {
-        id
+        movieId
         popularity
         title
         vote_average
@@ -21,15 +21,18 @@ export default function Home({data}) {
   return <MoviesList>
   {data.allMovie.nodes.map(movie => (
     <Movie key={movie.id}>
+      <Link to={`/${movie.movieId}`}>
+      <img src={movie.poster} alt={movie.title}/>
       {movie.title}
       <br/>
       popularity {movie.popularity}
       <br/>
+      id {movie.movieId}
+      <br/>
       vote avg {movie.vote_average}
       <br/>
       vote count {movie.vote_count}
-      <br/>
-      <img src={movie.poster} alt={movie.title}/>
+      </Link>
     </Movie>
   ))}
   </MoviesList>
