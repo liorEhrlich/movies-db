@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from 'gatsby'
+import styled from '@emotion/styled'
 
 export const query = graphql`
   {
@@ -10,17 +11,16 @@ export const query = graphql`
         title
         vote_average
         vote_count
-        backdrop_path
-        poster_path
+        poster
       }
     }
   }
 `
 
 export default function Home({data}) {
-  return <ul>
+  return <MoviesList>
   {data.allMovie.nodes.map(movie => (
-    <li key={movie.id}>
+    <Movie key={movie.id}>
       {movie.title}
       <br/>
       popularity {movie.popularity}
@@ -29,8 +29,20 @@ export default function Home({data}) {
       <br/>
       vote count {movie.vote_count}
       <br/>
-      <img src={'https://image.tmdb.org/t/p/w200/'+movie.poster_path} alt={movie.title}/>
-    </li>
+      <img src={movie.poster} alt={movie.title}/>
+    </Movie>
   ))}
-  </ul>
+  </MoviesList>
 }
+
+const Movie = styled.li`
+  width: 220px;
+  height: 400px;
+  margin-right: 20px;
+`
+
+const MoviesList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+`
