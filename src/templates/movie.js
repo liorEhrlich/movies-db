@@ -1,31 +1,20 @@
 import React from "react"
-import { graphql } from "gatsby"
 import styled from "styled-components"
 
 import Layout from "../components/layout"
 import MoviesList from "../components/movies/moviesList"
 
-export const query = graphql`
-  query($slug: Int!) {
-    allMovie(filter: { movieId: { eq: $slug } }) {
-      nodes {
-        overview
-        vote_average
-        vote_count
-        movieId
-      }
-    }
-  }
-`
-
-const Movie = props => {
-  const { title, trailer, similarMovies } = props.pageContext
-  const [{ overview }] = props.data.allMovie.nodes
+const Movie = ({pageContext}) => {
+  const { title, trailer, similarMovies } = pageContext
 
   return (
     <Layout>
       <Title>{title}</Title>
-      <Desc>{overview}</Desc>
+
+      {similarMovies.length && (
+        <Checkout href='#similar'>Check out similar movies</Checkout>
+      )}
+
       <IframeContainer>
         <Iframe
           allowfullscreen
@@ -37,7 +26,7 @@ const Movie = props => {
       </IframeContainer>
       {similarMovies.length && (
         <>
-          <SubTitle>More Like This</SubTitle>
+          <SubTitle id='similar'>More Like This</SubTitle>
           <MoviesList movies={similarMovies} isNavigatable={false} />
         </>
       )}
@@ -50,13 +39,6 @@ export default Movie
 const Title = styled.h1`
   font-size: 35px;
   color: ${props => props.theme.colors.primary};
-`
-
-const Desc = styled.p`
-  font-size: 18px;
-  color: ${props => props.theme.colors.border};
-  margin-top: 8px;
-  max-width: 920px;
 `
 
 const Iframe = styled.iframe`
@@ -80,4 +62,16 @@ const IframeContainer = styled.div`
 const SubTitle = styled.h2`
   font-size: 28px;
   color: ${props => props.theme.colors.border};
+`
+
+const Checkout = styled.a`
+  display: inline-block;
+  font-size: 20px;
+  color: ${props => props.theme.colors.border};
+  margin-bottom: 10px;
+  text-decoration: none;
+
+  :hover {
+    font-weight: bold;
+  }
 `

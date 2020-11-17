@@ -10,11 +10,11 @@ export const query = graphql`
       nodes {
         id
         movieId
-        popularity
         title
         vote_average
         vote_count
         poster
+        overview
       }
     }
   }

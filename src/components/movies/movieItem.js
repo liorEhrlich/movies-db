@@ -8,7 +8,9 @@ const MovieItem = ({ movie, isNavigatable = true }) => {
   if (isNavigatable) {
     return (
       <StyledLink to={`/${movie.movieId}`}>
-        <Poster image={movie.poster} />
+        <Poster image={movie.poster} >
+          <Description>{movie.overview}</Description>
+        </Poster>
         <Title>{movie.title}</Title>
         <Rating voteAvg={movie.vote_average} voteCount={movie.vote_count} />
       </StyledLink>
@@ -30,12 +32,20 @@ const Poster = styled.div`
   background: url(${props => props.image});
   border: 1px solid ${props => props.theme.colors.background};
   border-radius: 3px;
+  padding: 0 10px;
   height: 300px;
-  width: 200px;
+
+  > p {
+    visibility: hidden;
+  }
 
   :hover {
-    background: linear-gradient(#0c100c99, #0c100c99),
+    background: linear-gradient(#0c100ccc, #0c100ccc),
       url(${props => props.image});
+
+      > p {
+        visibility: visible;
+      }
   }
 `
 
@@ -47,4 +57,10 @@ const Title = styled.div`
   font-size: 18px;
   color: ${props => props.theme.colors.border};
   margin-top: 8px;
+  max-width: 200px;
+`
+
+const Description = styled.p`
+  font-size: 14px;
+  color: ${props => props.theme.colors.border};
 `
