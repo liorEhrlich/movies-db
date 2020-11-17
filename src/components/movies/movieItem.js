@@ -63,4 +63,6 @@ const Title = styled.div`
 const Description = styled.p`
   font-size: 14px;
   color: ${props => props.theme.colors.border};
+  overflow: hidden;
+  height: 270px;
 `
