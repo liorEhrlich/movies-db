@@ -28,12 +28,12 @@ const Wrapper = styled.div`
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
-    font-family: monospace;
+    font-family: Droid Sans, arial, sans-serif;
   }
 `
 
 const NavBar = styled.nav`
-  background-color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.navBar};
   z-index: 2;
   height: 45px;
   line-height: 45px;
@@ -44,9 +44,13 @@ const NavBar = styled.nav`
 `
 
 const HomeLink = styled(Link)`
-  color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.primary};
   font-size: 28px;
   text-decoration: none;
+
+  :hover {
+    font-weight: bold;
+  }
 `
 
 const ChildrenWrapper = styled.div`

@@ -3,11 +3,11 @@ import styled from "styled-components"
 
 import MovieItem from "./movieItem"
 
-const MoviesList = ({ movies }) => (
+const MoviesList = ({ movies, isNavigatable }) => (
   <Wrapper>
     {movies.map(movie => (
       <Movie key={movie.id}>
-        <MovieItem movie={movie} />
+        <MovieItem movie={movie} isNavigatable={isNavigatable} />
       </Movie>
     ))}
   </Wrapper>

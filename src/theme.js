@@ -4,7 +4,8 @@ const theme = {
     border: "#BCBFA3",
     primary: "#B3BF5A",
     secondary: "#9CA651",
-    tertiary: "#52591D"
+    tertiary: "#52591D",
+    navBar: '#423a66'
   }
 }
 

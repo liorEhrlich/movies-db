@@ -4,13 +4,27 @@ import styled from "styled-components"
 
 import Rating from "./rating"
 
-const MovieItem = ({ movie }) => (
-  <StyledLink to={`/${movie.movieId}`}>
-    <Poster image={movie.poster} />
-    <Title>{movie.title}</Title>
-    <Rating voteAvg={movie.vote_average} voteCount={movie.vote_count} />
-  </StyledLink>
-)
+const MovieItem = ({ movie, isNavigatable = true }) => {
+  if(isNavigatable) {
+    return (
+      <StyledLink to={`/${movie.movieId}`}>
+        <Poster image={movie.poster} />
+        <Title>{movie.title}</Title>
+        <Rating voteAvg={movie.vote_average} voteCount={movie.vote_count} />
+      </StyledLink>
+    )
+  }
+   
+else {
+  return (
+    <div>
+      <Poster image={movie.poster} />
+      <Title>{movie.title}</Title>
+      <Rating voteAvg={movie.vote_average} voteCount={movie.vote_count} />
+    </div>
+  )
+}
+}
 
 export default MovieItem
 

@@ -35,9 +35,13 @@ const Movie = props => {
           src={`${trailer}?autoplay=1`}
         ></Iframe>
       </IframeContainer>
-
-      <SubTitle>More Like This</SubTitle>
-      <MoviesList movies={similarMovies} />
+      {
+        similarMovies.length &&
+        <>
+          <SubTitle>More Like This</SubTitle>
+          <MoviesList movies={similarMovies} isNavigatable={false}/>
+        </>
+      }  
     </Layout>
   )
 }
@@ -46,7 +50,7 @@ export default Movie
 
 const Title = styled.h1`
   font-size: 35px;
-  color: ${props => props.theme.colors.border};
+  color: ${props => props.theme.colors.primary};
 `
 
 const Desc = styled.p`
