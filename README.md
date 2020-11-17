@@ -10,7 +10,7 @@
 
 - Similar movies to your chosen movie!
 
-**🧐 Nice to have**
+**🤓 Nice to have**
 
 - Pagination
 
