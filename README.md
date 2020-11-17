@@ -1,6 +1,10 @@
 <h1 align="center">
-  🎥 Movie DB
+  🎥 Movies DB
 </h1>
+
+***Check out the deployed website:***
+
+****https://movies-db-leor.netlify.app/****
 
 **🧐 What's inside?**
 
