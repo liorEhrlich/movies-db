@@ -1,6 +1,9 @@
 import React from "react"
-import { graphql, Link } from 'gatsby'
-import styled from '@emotion/styled'
+import { graphql } from "gatsby"
+import { ThemeProvider } from "styled-components"
+
+import MoviesList from "../components/MoviesList"
+import theme from "../theme"
 
 export const query = graphql`
   {
@@ -17,35 +20,10 @@ export const query = graphql`
   }
 `
 
-export default function Home({data}) {
-  return <MoviesList>
-  {data.allMovie.nodes.map(movie => (
-    <Movie key={movie.id}>
-      <Link to={`/${movie.movieId}`}>
-      <img src={movie.poster} alt={movie.title}/>
-      {movie.title}
-      <br/>
-      popularity {movie.popularity}
-      <br/>
-      id {movie.movieId}
-      <br/>
-      vote avg {movie.vote_average}
-      <br/>
-      vote count {movie.vote_count}
-      </Link>
-    </Movie>
-  ))}
-  </MoviesList>
-}
+const Home = ({ data }) => (
+  <ThemeProvider theme={theme}>
+    <MoviesList movies={data.allMovie.nodes} />
+  </ThemeProvider>
+)
 
-const Movie = styled.li`
-  width: 220px;
-  height: 400px;
-  margin-right: 20px;
-`
-
-const MoviesList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-`
+export default Home
