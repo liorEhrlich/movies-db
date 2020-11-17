@@ -71,7 +71,7 @@ const Iframe = styled.iframe`
 const IframeContainer = styled.div`
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%;
+  padding-top: 35%;
 `
 
 const SubTitle = styled.h2`

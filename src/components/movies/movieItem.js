@@ -8,14 +8,6 @@ const MovieItem = ({ movie }) => (
   <StyledLink to={`/${movie.movieId}`}>
     <Poster image={movie.poster} />
     <Title>{movie.title}</Title>
-    {/* <br />
-          popularity {movie.popularity}
-          <br />
-          id {movie.movieId}
-          <br />
-          vote avg {movie.vote_average}
-          <br />
-          vote count {movie.vote_count} */}
     <Rating voteAvg={movie.vote_average} voteCount={movie.vote_count} />
   </StyledLink>
 )

@@ -19,6 +19,7 @@ const Wrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
+  padding: 0;
 `
 
 const Movie = styled.li`
