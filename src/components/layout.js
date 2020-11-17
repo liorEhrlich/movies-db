@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
+    font-family: monospace;
   }
 `
 

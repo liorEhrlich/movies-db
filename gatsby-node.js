@@ -68,7 +68,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   for (i = 0; i < movieNodes.length; i++) {
     const { movieId, title } = movieNodes[i]
 
-    const movieTrailer = await axios({
+    const movieTrailerResponse = await axios({
       method: "GET",
       url: `https://api.themoviedb.org/3/movie/${movieId}/videos`,
       params: {
@@ -78,9 +78,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     let key = ""
 
-    if (movieTrailer.data.results.length > 0) {
-      ;[{ key }] = movieTrailer.data.results
+    if (movieTrailerResponse.data.results.length > 0) {
+      ;[{ key }] = movieTrailerResponse.data.results
     }
+
+    const similarMoviesResponse = await axios({
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/${movieId}/recommendations`,
+      params: {
+        api_key: process.env.MOVIES_DB_API_KEY
+      }
+    })
+
+    const similarMovies = similarMoviesResponse.data.results.map(movie => ({
+      ...movie,
+      movieId: movie.id,
+      poster: "https://image.tmdb.org/t/p/w200/" + movie.poster_path
+    }))
 
     actions.createPage({
       path: movieId + "",
@@ -88,6 +102,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         slug: movieId,
         title,
+        similarMovies,
         ...(key && { trailer: `https://www.youtube.com/embed/${key}` })
       }
     })
