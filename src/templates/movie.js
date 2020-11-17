@@ -35,13 +35,12 @@ const Movie = props => {
           src={`${trailer}?autoplay=1`}
         ></Iframe>
       </IframeContainer>
-      {
-        similarMovies.length &&
+      {similarMovies.length && (
         <>
           <SubTitle>More Like This</SubTitle>
-          <MoviesList movies={similarMovies} isNavigatable={false}/>
+          <MoviesList movies={similarMovies} isNavigatable={false} />
         </>
-      }  
+      )}
     </Layout>
   )
 }
@@ -79,6 +78,6 @@ const IframeContainer = styled.div`
 `
 
 const SubTitle = styled.h2`
-font-size: 28px;
-color: ${props => props.theme.colors.border}; 
+  font-size: 28px;
+  color: ${props => props.theme.colors.border};
 `

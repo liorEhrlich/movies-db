@@ -5,7 +5,7 @@ const theme = {
     primary: "#B3BF5A",
     secondary: "#9CA651",
     tertiary: "#52591D",
-    navBar: '#423a66'
+    navBar: "#423a66"
   }
 }
 

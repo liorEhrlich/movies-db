@@ -9,13 +9,11 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Wrapper>
-          <NavBar>
-            <HomeLink to='/'>Movies DB</HomeLink>
-          </NavBar>
-          <ChildrenWrapper>
-          {children}
-          </ChildrenWrapper>
-        </Wrapper>
+        <NavBar>
+          <HomeLink to="/">Movies DB</HomeLink>
+        </NavBar>
+        <ChildrenWrapper>{children}</ChildrenWrapper>
+      </Wrapper>
     </ThemeProvider>
   )
 }
