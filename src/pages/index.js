@@ -1,9 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { ThemeProvider } from "styled-components"
 
-import MoviesList from "../components/MoviesList"
-import theme from "../theme"
+import MoviesList from "../components/moviesList"
+import Layout from "../components/layout"
 
 export const query = graphql`
   {
@@ -21,9 +20,9 @@ export const query = graphql`
 `
 
 const Home = ({ data }) => (
-  <ThemeProvider theme={theme}>
+  <Layout>
     <MoviesList movies={data.allMovie.nodes} />
-  </ThemeProvider>
+  </Layout>
 )
 
 export default Home
