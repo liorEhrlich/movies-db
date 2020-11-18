@@ -17,6 +17,7 @@ export default MoviesList
 
 const Wrapper = styled.ul`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   list-style: none;
   padding: 0;

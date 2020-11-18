@@ -9,7 +9,7 @@ exports.sourceNodes = async ({
   createNodeId,
   createContentDigest
 }) => {
-  const numPages = 15
+  const numPages = 3
 
   const axiosRequests = [...Array(numPages).keys()].map(i =>
     axios({

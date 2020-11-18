@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import MoviesList from "../components/movies/moviesList"
 import Layout from "../components/layout"
+import Preview from "../components/movies/preview"
 
 export const query = graphql`
   {
@@ -14,16 +15,22 @@ export const query = graphql`
         vote_average
         vote_count
         poster
+        poster_path
+        backdrop_path
         overview
       }
     }
   }
 `
 
-const Home = ({ data }) => (
+const Home = ({ data }) => {
+  const movies = data.allMovie.nodes
+
+  return (
   <Layout>
-    <MoviesList movies={data.allMovie.nodes} />
+    <Preview movie={movies[0]}/>
+    <MoviesList movies={movies} />
   </Layout>
-)
+)}
 
 export default Home
