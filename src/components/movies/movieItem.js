@@ -29,10 +29,10 @@ const MovieItem = ({ movie, isNavigatable = true }) => {
 export default MovieItem
 
 const Poster = styled.div`
-  background: url(${props => props.image});
+background: url(${props => props.image});
   border: 1px solid ${props => props.theme.colors.background};
   border-radius: 3px;
-  padding: 0 10px;
+  padding: 0 15px;
   height: 300px;
 
   > p {

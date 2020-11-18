@@ -21,10 +21,11 @@ const Wrapper = styled.ul`
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
+  margin: 0;
 `
 
 const Movie = styled.li`
-  margin-right: 20px;
-  margin-bottom: 10px;
+  margin-right: 40px;
+  margin-bottom: 30px;
   width: 200px;
 `
