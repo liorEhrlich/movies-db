@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
+import { Helmet } from "react-helmet"
 
 import theme from "../theme"
 
@@ -8,6 +9,9 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <Helmet>
+        <title>Movies DB</title>
+      </Helmet>
       <Wrapper>
         <NavBar>
           <HomeLink to="/">Movies DB</HomeLink>
